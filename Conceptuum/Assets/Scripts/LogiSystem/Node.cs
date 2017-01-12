@@ -6,7 +6,6 @@ public class Node : MonoBehaviour {
 	public List<Node> from;
 	public List<GameObject> wires;
 	
-	// Update is called once per frame
 	public void UpdateWires () {
 		if(wires.Count > 0) {
 			foreach(GameObject wire in wires) {

@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+//using UnityEditor;
 using UnityEngine;
 
 public class NodeSystem : MonoBehaviour {
@@ -16,6 +16,7 @@ public class NodeSystem : MonoBehaviour {
 	}
 }
 
+/*
 [CustomEditor(typeof(NodeSystem))]
 public class MySystemEditor : Editor {
 	public override void OnInspectorGUI() {
@@ -31,3 +32,4 @@ public class MySystemEditor : Editor {
 		}
 	}
 }
+*/

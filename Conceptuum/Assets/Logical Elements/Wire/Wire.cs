@@ -22,7 +22,9 @@ public class Wire : BoolOutputElement {
 
 	void UpdateState() {
 		outputBool = inputBool.outputBool;
-		if(inputBool.outputBool) {
+        if (inputBool.outputBool == null) {
+            c = Color.gray;
+        } else if ((bool)inputBool.outputBool) {
 			c = Color.green;
 		} else {
 			c = Color.red;

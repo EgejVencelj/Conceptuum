@@ -8,6 +8,7 @@ using UnityEditor;
 
 public class Switch : BoolOutputElement {
 	public void Toggle() {
+        if (outputBool == null) outputBool = false;
 		outputBool = !outputBool;
 	}
 }
@@ -20,8 +21,9 @@ public class SwitchEditor : Editor {
 		base.OnInspectorGUI();
 		Switch el = (Switch)target;
 
-		el.outputBool = EditorGUILayout.Toggle("Enabled", el.outputBool);
+		//el.outputBool = EditorGUILayout.Toggle("Enabled", el.outputBool);
 
 	}
 }
 #endif
+

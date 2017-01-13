@@ -16,7 +16,7 @@ public class Door : BoolOutputElement {
 	void UpdateState() {
 		outputBool = inputBool.outputBool;
 
-		if(outputBool) {
+		if(outputBool is bool && (bool)outputBool) {
 			anim.SetTrigger("Open");
 		}else {
 			anim.ResetTrigger("Open");

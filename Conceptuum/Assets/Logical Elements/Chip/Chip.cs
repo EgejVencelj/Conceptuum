@@ -30,7 +30,7 @@ public class Chip : BoolOutputElement {
 
 	void UpdateState () {
 		if (attachedSocket) {
-			bool r = false;
+			bool? r = null;
 
 			int n = attachedSocket.inputBools.Count;
 
@@ -48,19 +48,28 @@ public class Chip : BoolOutputElement {
 		}
 	}
 
-	private bool Logic(bool a, bool b) {
+	private bool? Logic(bool? a, bool? b) {
+        if (a == null || b == null) return null;
+
+        var aa = (bool)a;
+        var bb = (bool)b;
+
+
 		switch(chipType) {
 			case ChipType.AND: {
-				return a && b;
+				return aa && bb;
 			}
 			case ChipType.OR: {
-				return a || b;
+				return aa || bb;
 			}
 			case ChipType.XOR: {
-				return a ^ b;
+				return aa ^ bb;
 			}
+            default:
+                return null;                
 		}
-		return false;
+
+     		
 	}
 
 	public void Attach(Socket s) {

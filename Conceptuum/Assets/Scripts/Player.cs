@@ -10,15 +10,19 @@ public class Player : MonoBehaviour {
 			RaycastHit hit;
 			Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
 
+
+         
+
 			if(Physics.Raycast(ray, out hit)) {
+                Debug.Log(hit.transform.tag);                
 				Transform objectHit = hit.transform;
 
-				//Debug.Log(objectHit.name);
+          
 				Switch s = objectHit.GetComponent<Switch>();
 				if(s != null) {
 					s.Toggle();
 				}
-				// Do something with the object that was hit by the raycast.
+				
 			}
 		}
 	}

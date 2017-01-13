@@ -1,0 +1,74 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using System.Linq;
+
+public class Dialogue : MonoBehaviour {
+	public Text robotDialogue;
+	public CanvasGroup holder;
+	public RectTransform optionsHolder;
+	public RectTransform optionPrefab;
+
+	public List<DialogueEntry> textQueue = new List<DialogueEntry>();
+
+	bool busy = false;
+
+	void Start() {
+		textQueue.Add(new DialogueEntry("Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!", new List<string>() { "Hello to you too!", "..."}));
+		textQueue.Add(new DialogueEntry("My name is fkin Roboticus!", new List<string>() { "..." }));
+		textQueue.Add(new DialogueEntry("I\ncan\nalso\nspeak\nin\nlines", new List<string>() { "Well that's pretty damn amazing!", "..." }));
+	}
+
+	void Update() {
+		if(textQueue.Count > 0 && !busy) {
+			DialogueEntry str = textQueue[0];
+			textQueue.RemoveAt(0);
+			Debug.Log("Calling coroutine");
+			StartCoroutine(TypeText(str));
+			
+		}
+
+		if(robotDialogue.text.Length > 0 && holder.alpha < 1) {
+			holder.alpha += 0.05f;
+		}
+		if(robotDialogue.text.Length == 0 && holder.alpha > 0) {
+			holder.alpha -= 0.05f;
+		}
+	}
+
+
+	IEnumerator TypeText(DialogueEntry dialogue) {
+		busy = true;
+		robotDialogue.text = "";
+
+		foreach(Transform o in optionsHolder.transform) {
+			Destroy(o.gameObject);
+		}
+
+		foreach(char letter in dialogue.txt.ToCharArray()) {
+			robotDialogue.text += letter;
+			yield return new WaitForSeconds(0.01f);
+		}
+
+		
+		for(int i = 0; i<dialogue.responses.Count; i++) {
+			string str = dialogue.responses[i];
+			RectTransform response = Instantiate(optionPrefab, optionsHolder);
+			response.transform.SetSiblingIndex(0);
+			Text opTxt = optionPrefab.GetComponent<Text>();
+
+			Debug.Log((i+1)  + " " + str);
+			opTxt.text = i.ToString();
+		}
+
+		while(true) {
+			if(Input.GetKeyDown(KeyCode.Alpha1)) {
+				break;
+			}
+			yield return null;
+		}
+		busy = false;
+		robotDialogue.text = "";
+	}
+}

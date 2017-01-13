@@ -8,6 +8,8 @@ public class Robot : MonoBehaviour {
 	public float duration = 2;
 	float t = 0;
 
+	public Transform player;
+
 	// Use this for initialization
 	void Start () {
 		startPos = transform.position;

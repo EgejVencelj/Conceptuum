@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 
@@ -80,8 +82,10 @@ public class Chip : BoolOutputElement {
 		//Se odjavimo
 		foreach(BoolOutputElement p in inputBools) {
 			if(p.transform == this.transform) {
+#if UNITY_EDITOR
 				Debug.LogError("Detected infinite loop on selected chip.");
 				Selection.activeGameObject = this.gameObject;
+#endif
 				continue;
 				//We dont want loops
 			}

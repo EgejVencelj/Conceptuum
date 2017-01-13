@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour {
+public class Door : BoolOutputElement {
 	public Animator anim;
 
-	void OnTriggerEnter(Collider col) {
-		if(col.gameObject.tag == "Player") {
-			anim.SetTrigger("Open");
+	public BoolOutputElement inputBool;
+
+	void Start() {
+		if(inputBool) {
+			inputBool.onStateChanged += UpdateState;
 		}
 	}
 
+	void UpdateState() {
+		outputBool = inputBool.outputBool;
 
-	void OnTriggerExit(Collider col) {
-		if(col.gameObject.tag == "Player") {
+		if(outputBool) {
+			anim.SetTrigger("Open");
+		}else {
 			anim.ResetTrigger("Open");
 		}
 	}

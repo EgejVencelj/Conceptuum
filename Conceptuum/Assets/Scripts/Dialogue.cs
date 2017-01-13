@@ -15,9 +15,9 @@ public class Dialogue : MonoBehaviour {
 	bool busy = false;
 
 	void Start() {
-		textQueue.Add(new DialogueEntry("Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!", new List<string>() { "Hello to you too!", "..."}));
+		textQueue.Add(new DialogueEntry("Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello!", new List<string>() { "Hello to you too!", "..."}));
 		textQueue.Add(new DialogueEntry("My name is fkin Roboticus!", new List<string>() { "..." }));
-		textQueue.Add(new DialogueEntry("I\ncan\nalso\nspeak\nin\nlines", new List<string>() { "Well that's pretty damn amazing!", "..." }));
+		textQueue.Add(new DialogueEntry("I\ncan\nalso\nspeak\nin\nlines", new List<string>() { "Well that's pretty damn amazing!", "...", "OK, lets check if this works" }));
 	}
 
 	void Update() {
@@ -51,19 +51,28 @@ public class Dialogue : MonoBehaviour {
 			yield return new WaitForSeconds(0.01f);
 		}
 
-		
-		for(int i = 0; i<dialogue.responses.Count; i++) {
+
+		int n = dialogue.responses.Count;
+		for(int i = 0; i < n; i++) {
 			string str = dialogue.responses[i];
 			RectTransform response = Instantiate(optionPrefab, optionsHolder);
-			response.transform.SetSiblingIndex(0);
-			Text opTxt = optionPrefab.GetComponent<Text>();
+			response.transform.SetSiblingIndex(optionsHolder.childCount-1);
+			Text opTxt = response.GetComponent<Text>();
 
-			Debug.Log((i+1)  + " " + str);
-			opTxt.text = i.ToString();
+			opTxt.text = string.Format("[{0}]: {1}", (i+1), str);
 		}
-
+		
 		while(true) {
-			if(Input.GetKeyDown(KeyCode.Alpha1)) {
+			if(n >= 1 && Input.GetKeyDown(KeyCode.Alpha1)) {
+				break;
+			}
+			if(n >= 2 && Input.GetKeyDown(KeyCode.Alpha2)) {
+				break;
+			}
+			if(n >= 3 && Input.GetKeyDown(KeyCode.Alpha3)) {
+				break;
+			}
+			if(n >= 4 && Input.GetKeyDown(KeyCode.Alpha4)) {
 				break;
 			}
 			yield return null;

@@ -10,10 +10,6 @@ public class NodeSystem : MonoBehaviour {
 		
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
 
 /*

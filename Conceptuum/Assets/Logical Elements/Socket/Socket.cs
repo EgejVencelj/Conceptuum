@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Socket : MonoBehaviour {
+public class Socket : BoolOutputElement {
 
-    public GameObject[] inputBools;
-       
+	public List<BoolOutputElement> inputBools;
+
+
 }

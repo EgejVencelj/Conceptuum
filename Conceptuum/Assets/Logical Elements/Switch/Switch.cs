@@ -2,13 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Switch : MonoBehaviour {
-    
-    void Start() {
+public class Switch : BoolOutputElement {
 
-    }
-
-    void Update() {
-       
-    }
 }

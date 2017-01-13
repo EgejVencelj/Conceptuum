@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LED : MonoBehaviour {
+public class LED : BoolOutputElement {
 
-    public GameObject inputBool;
+	public BoolOutputElement inputBool;
 
-    void Start() {
-        if (inputBool) {
-            bool b = inputBool.GetComponent<BoolOutputElement>().outputBool;
-            transform.GetComponentInChildren<Light>().enabled = b;
-        }
-    }
+	void Start() {
+		if(inputBool) {
+			inputBool.onStateChanged += UpdateState;
+		}
+	}
 
-    void Update() {
-        Start();
-    }
+	void UpdateState() {
+		transform.GetComponentInChildren<Light>().enabled = inputBool;
+		outputBool = inputBool;
+	}
 }

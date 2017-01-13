@@ -19,9 +19,8 @@ public class SwitchEditor : Editor {
 	public override void OnInspectorGUI() {
 		base.OnInspectorGUI();
 		Switch el = (Switch)target;
-		if(GUILayout.Button("Toggle")) {
-			el.Toggle();
-		}
+
+		el.outputBool = EditorGUILayout.Toggle("Enabled", el.outputBool);
 
 	}
 }

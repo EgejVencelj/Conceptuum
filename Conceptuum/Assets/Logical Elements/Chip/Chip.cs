@@ -28,7 +28,7 @@ public class Chip : BoolOutputElement {
 
 	void UpdateState () {
 		if (attachedSocket) {
-			bool r = false; 
+			bool r = false;
 
 			int n = attachedSocket.inputBools.Count;
 

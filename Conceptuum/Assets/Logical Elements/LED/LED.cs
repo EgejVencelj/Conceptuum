@@ -13,7 +13,7 @@ public class LED : BoolOutputElement {
 	}
 
 	void UpdateState() {
-		transform.GetComponentInChildren<Light>().enabled = inputBool;
-		outputBool = inputBool;
+		transform.GetComponentInChildren<Light>().enabled = inputBool.outputBool;
+		outputBool = inputBool.outputBool;
 	}
 }

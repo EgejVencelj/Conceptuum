@@ -50,7 +50,7 @@ public class Dialogue : MonoBehaviour {
 
 		int n = dialogue.responses.Count;
 		for(int i = 0; i < n; i++) {
-			yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(0.1f);
 			string str = dialogue.responses[i];
 			RectTransform response = Instantiate(optionPrefab, optionsHolder);
 			response.transform.SetSiblingIndex(optionsHolder.childCount-1);

@@ -68,10 +68,12 @@ public class Chip : BoolOutputElement {
 			int n = attachedSocket.inputBools.Count;
 
 			if (n >= 2) {
-				r = Logic(
-						inputBools[0].outputBool,
-						inputBools[1].outputBool
-					);
+                bool? aa = null;
+                bool? bb = null;
+                if (inputBools[0]) aa = inputBools[0].outputBool;
+                if (inputBools[1]) bb = inputBools[1].outputBool;
+
+                r = Logic(aa,bb);
 				for(int i = 2; i<n; i++) {
 					r = Logic(r, inputBools[i].outputBool);
 				}
@@ -113,16 +115,18 @@ public class Chip : BoolOutputElement {
 
 		//Se prijavimo na state change parentov
 		foreach(BoolOutputElement p in inputBools) {
-			if(p.transform == this.transform) {
+            if (p) {
+                if (p.transform == this.transform) {
 #if UNITY_EDITOR
-				Debug.LogError("Detected infinite loop on selected chip.");
-				Selection.activeGameObject = this.gameObject;
+                    Debug.LogError("Detected infinite loop on selected chip.");
+                    Selection.activeGameObject = this.gameObject;
 #endif
-				continue;
-				//We dont want loops
-			}
-            if(p) {
-                p.onStateChanged += UpdateState;
+                    continue;
+                    //We dont want loops
+                }
+                if (p) {
+                    p.onStateChanged += UpdateState;
+                }
             }
 		}
 		UpdateState();

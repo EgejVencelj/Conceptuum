@@ -24,7 +24,6 @@ public class Dialogue : MonoBehaviour {
 		if(textQueue.Count > 0 && !busy) {
 			DialogueEntry str = textQueue[0];
 			textQueue.RemoveAt(0);
-			Debug.Log("Calling coroutine");
 			StartCoroutine(TypeText(str));
 			
 		}

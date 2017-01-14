@@ -5,7 +5,6 @@ using UnityEngine;
 public class Socket : BoolOutputElement {
 
 	public List<BoolOutputElement> inputBools;
-    public GameObject attachedChip;
-    public bool epoxied = false;
-
+	public GameObject attachedChip;
+	public bool epoxied = false;
 }

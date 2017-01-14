@@ -107,22 +107,25 @@ public class Chip : BoolOutputElement {
 
 	public void Attach(Socket s) {
         GetComponent<Rigidbody>().isKinematic = true;
-        s.attachedChip = gameObject;
+		attachedSocket = s;
+		s.attachedChip = gameObject;
 		inputBools = s.inputBools;
 
 		//Se prijavimo na state change parentov
 		foreach(BoolOutputElement p in inputBools) {
-			/*if(p.transform == this.transform) {
+			if(p.transform == this.transform) {
+#if UNITY_EDITOR
 				Debug.LogError("Detected infinite loop on selected chip.");
 				Selection.activeGameObject = this.gameObject;
+#endif
 				continue;
 				//We dont want loops
-			}*/
+			}
             if(p) {
                 p.onStateChanged += UpdateState;
             }
-			
 		}
+		UpdateState();
 	}
 
 	public void Unattach() {
@@ -140,6 +143,11 @@ public class Chip : BoolOutputElement {
                 p.onStateChanged -= UpdateState;
             }
 			
+		}
+		if(attachedSocket != null) {
+			attachedSocket.GetComponent<BoolOutputElement>().outputBool = false;
+			attachedSocket.attachedChip = null;
+			attachedSocket = null;
 		}
 
 		inputBools = null;

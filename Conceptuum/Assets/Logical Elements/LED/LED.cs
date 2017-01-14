@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LED : BoolOutputElement {
 
-    public Material onMaterial;
-    public Material offMaterial;
+	public Material onMaterial;
+	public Material offMaterial;
 
 	public BoolOutputElement inputBool;
 
@@ -13,13 +13,14 @@ public class LED : BoolOutputElement {
 		if(inputBool) {
 			inputBool.onStateChanged += UpdateState;
 		}
+		UpdateState();
 	}
 
 	void UpdateState() {
-        var shining = inputBool.outputBool is bool && (bool)inputBool.outputBool;
-        transform.GetComponentInChildren<Light>().enabled = shining;
-        transform.FindChild("Bulb").GetComponent<MeshRenderer>().material = shining ? onMaterial : offMaterial;
+		var shining = inputBool.outputBool is bool && (bool)inputBool.outputBool;
+		transform.GetComponentInChildren<Light>().enabled = shining;
+		transform.FindChild("Bulb").GetComponent<MeshRenderer>().material = shining ? onMaterial : offMaterial;
 
-        outputBool = inputBool.outputBool;
+		outputBool = inputBool.outputBool;
 	}
 }

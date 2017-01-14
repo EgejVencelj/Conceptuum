@@ -80,9 +80,7 @@ public class Player : MonoBehaviour {
                 chip = chipTransform.GetComponent<Chip>();
             }
             if (!chipInHand && !socket.epoxied) {
-                socket.attachedChip = null;
-                chip.attachedSocket = null;
-                chip.Unattach();
+				chip.Unattach();
                 pickChipInHand(chip.transform);
             } 
         } else if (t.tag.Equals("Chip")) { //picking chip in hand
@@ -99,8 +97,6 @@ public class Player : MonoBehaviour {
 
                 chip = chipInHand.GetComponent<Chip>();
                 chip.Attach(socket);
-                chip.attachedSocket = socket;
-                socket.attachedChip = chipInHand;
                 chipInHand = null;
             }
         }      

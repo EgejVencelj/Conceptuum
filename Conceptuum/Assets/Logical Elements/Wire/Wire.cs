@@ -22,9 +22,9 @@ public class Wire : BoolOutputElement {
 
 	void UpdateState() {
 		outputBool = inputBool.outputBool;
-        if (inputBool.outputBool == null) {
-            c = Color.gray;
-        } else if ((bool)inputBool.outputBool) {
+		if (inputBool.outputBool == null) {
+			c = Color.gray;
+		} else if ((bool)inputBool.outputBool) {
 			c = Color.green;
 		} else {
 			c = Color.red;
@@ -48,7 +48,7 @@ public class WireEditor : Editor {
 			List<WireNode> nodes = el.nodes;
 			GameObject node = new GameObject("Node " + nodes.Count, typeof(WireNode));
 			node.transform.parent = el.transform;
-			node.transform.localPosition = Vector3.zero;
+			node.transform.position = el.nodes[el.nodes.Count-1].transform.position;
 
 			WireNode wn = node.GetComponent<WireNode>();
 			if(el.nodes.Count > 0) {

@@ -4,10 +4,17 @@ using UnityEditor;
 #endif
 using UnityEngine;
 
+using System.Linq;
 
-public class Chip : BoolOutputElement {   
 
-	public enum ChipType {
+public class Chip : BoolOutputElement {
+
+    public Material andMaterial;
+    public Material orMaterial;
+    public Material xorMaterial;
+
+
+    public enum ChipType {
 		AND=0,
 		OR=1,
 		XOR=2
@@ -15,14 +22,40 @@ public class Chip : BoolOutputElement {
 	
 
 	public Socket attachedSocket;
+    public GameObject hand;
+
+
+
 	public ChipType chipType = ChipType.AND;
 
 	public List<BoolOutputElement> inputBools;
 
 
 	void Start() {
-		//nalep teksturo na podlagi chipTypa
-		if(attachedSocket != null) {
+        var mr = transform.FindChild("ChipModel").GetComponent<Renderer>();
+        switch (chipType) {
+            case ChipType.AND:               
+                mr.material = andMaterial;
+                break;
+            case ChipType.OR:
+                mr.material = orMaterial;
+                break;
+            case ChipType.XOR:
+                mr.material = xorMaterial;
+                break;
+        }
+
+        GetComponentInChildren<MeshFilter>().mesh.uv = new[] {  
+            new Vector2(-1, -1),new Vector2(-1, -1),new Vector2(-1, -1),new Vector2(-1, -1),
+            new Vector2(1, 0),new Vector2(0, 0),new Vector2(-1, -1), new Vector2(-1, -1),
+            new Vector2(1, 1),new Vector2(0, 1),new Vector2(-1, -1), new Vector2(-1, -1),
+            new Vector2(-1, -1),new Vector2(-1, -1),new Vector2(-1, -1), new Vector2(-1, -1),
+            new Vector2(-1, -1),new Vector2(-1, -1),new Vector2(-1, -1), new Vector2(-1, -1),
+            new Vector2(-1, -1),new Vector2(-1, -1),new Vector2(-1, -1), new Vector2(-1, -1)
+        };
+
+
+        if (attachedSocket != null) {
 			Attach(attachedSocket);
 		}
 	}
@@ -73,6 +106,8 @@ public class Chip : BoolOutputElement {
 	}
 
 	public void Attach(Socket s) {
+        GetComponent<Rigidbody>().isKinematic = true;
+        s.attachedChip = gameObject;
 		inputBools = s.inputBools;
 
 		//Se prijavimo na state change parentov
@@ -83,22 +118,28 @@ public class Chip : BoolOutputElement {
 				continue;
 				//We dont want loops
 			}*/
-			p.onStateChanged += UpdateState;
+            if(p) {
+                p.onStateChanged += UpdateState;
+            }
+			
 		}
 	}
 
 	public void Unattach() {
 		//Se odjavimo
 		foreach(BoolOutputElement p in inputBools) {
-			if(p.transform == this.transform) {
+            if (p) {
+                if (p.transform == this.transform) {
 #if UNITY_EDITOR
-				Debug.LogError("Detected infinite loop on selected chip.");
-				Selection.activeGameObject = this.gameObject;
+                    Debug.LogError("Detected infinite loop on selected chip.");
+                    Selection.activeGameObject = this.gameObject;
 #endif
-				continue;
-				//We dont want loops
-			}
-			p.onStateChanged -= UpdateState;
+                    continue;
+                    //We dont want loops
+                }
+                p.onStateChanged -= UpdateState;
+            }
+			
 		}
 
 		inputBools = null;

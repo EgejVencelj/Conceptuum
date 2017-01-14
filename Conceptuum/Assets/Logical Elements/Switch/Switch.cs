@@ -9,8 +9,14 @@ using UnityEditor;
 public class Switch : BoolOutputElement {
 	public void Toggle() {
         if (outputBool == null) outputBool = false;
-		outputBool = !outputBool;
-	}
+		outputBool = !outputBool;        
+    }
+
+    private void Update() {
+        var b = outputBool is bool && (bool)outputBool;
+        transform.FindChild("Button").transform.localPosition = b ? new Vector3(0, 0.035f, 0) : new Vector3(0, 0.065f, 0); //fck gc
+    }
+    
 }
 
 #if UNITY_EDITOR

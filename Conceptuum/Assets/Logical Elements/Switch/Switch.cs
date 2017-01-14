@@ -11,7 +11,12 @@ public class Switch : BoolOutputElement {
 		if(outputBool == null) {
 			outputBool = false;
 		} else {
-			outputBool = !outputBool;
+			if(outputBool == true) {
+				outputBool = false;
+			} else {
+				outputBool = true;
+			}
+			
 		}
 		var b = outputBool is bool && (bool)outputBool;
 		transform.FindChild("Button").transform.localPosition = b ? new Vector3(0, 0.035f, 0) : new Vector3(0, 0.065f, 0); //fck gc

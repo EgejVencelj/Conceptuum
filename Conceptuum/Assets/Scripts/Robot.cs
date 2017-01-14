@@ -100,7 +100,7 @@ public class Robot : MonoBehaviour {
 				break;
 			}
 			case 7: {
-				t = new DialogueEntry("Okay, the same thing happened. I think you are done there! If we... you just open this last door, we should be free!",
+				t = new DialogueEntry("Nice, you've cracked the second one. I think you are done there! If you just open this last door, we should be free!",
 					new List<string>() {
 												"..."});
 				dialogue.textQueue.Add(t);

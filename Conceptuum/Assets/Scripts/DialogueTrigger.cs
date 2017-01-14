@@ -12,6 +12,11 @@ public class DialogueTrigger : MonoBehaviour {
 	}
 	
 	public void Trigger() {
+		StartCoroutine(checkDelay());
+	}
+
+	IEnumerator checkDelay() {
+		yield return new WaitForSeconds(0.1f);
 		if(boolElement.outputBool == true) {
 			boolElement.onStateChanged -= Trigger;
 			robot.dialogueState = dialogueState;

@@ -48,7 +48,12 @@ public class WireEditor : Editor {
 			List<WireNode> nodes = el.nodes;
 			GameObject node = new GameObject("Node " + nodes.Count, typeof(WireNode));
 			node.transform.parent = el.transform;
-			node.transform.position = el.nodes[el.nodes.Count-1].transform.position;
+			if(el.nodes.Count > 0) {
+				node.transform.position = el.nodes[el.nodes.Count - 1].transform.position;
+			} else {
+				node.transform.localPosition = Vector3.zero;
+			}
+			
 
 			WireNode wn = node.GetComponent<WireNode>();
 			if(el.nodes.Count > 0) {

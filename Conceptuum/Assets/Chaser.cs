@@ -19,7 +19,7 @@ public class Chaser : MonoBehaviour {
     }
 
 
-    void Update() {
+    void Update() {/*
 
         var robotMesh = transform.FindChild("RobotHead");
         robotMesh.LookAt(target);
@@ -33,7 +33,7 @@ public class Chaser : MonoBehaviour {
         if (targetDistance > minDist) {
             var direction = target.position - transform.position;            
             transform.position += direction.normalized * speed * Time.deltaTime;
-        }
+        }*/
            
     }
 

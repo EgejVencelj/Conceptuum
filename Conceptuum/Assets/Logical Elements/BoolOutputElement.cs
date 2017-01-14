@@ -6,7 +6,14 @@ using UnityEngine;
 
 
 public class BoolOutputElement : MonoBehaviour {
-	bool? b = null;
+
+    public override string ToString() {
+        string s = " = N";
+        if (b != null) s = (bool)b ? " = 1" : " = 0";
+        return "--" + this.GetType().Name + s;
+    }
+
+    public bool? b = null;
 
 	public delegate void OnStateChange();
 

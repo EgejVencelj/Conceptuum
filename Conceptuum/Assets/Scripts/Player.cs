@@ -47,9 +47,7 @@ public class Player : MonoBehaviour {
     void pickChipInHand(Transform chipTransform) {
         if (chipInHand) return; //can't carry more than one
 
-        var chip = chipTransform.GetComponent<Chip>();
-
-        chipInHand = chipTransform.gameObject;        
+        this.chipInHand = chipTransform.gameObject;        
 
         chipTransform.parent = hand.transform;
         chipTransform.localScale = Vector3.one;
@@ -105,7 +103,7 @@ public class Player : MonoBehaviour {
     void dropChip() {
         if (chipInHand) {            
             hand.transform.DetachChildren();
-            var rg = chipInHand.GetComponent<Rigidbody>().isKinematic = false;
+            chipInHand.GetComponent<Rigidbody>().isKinematic = false;
             chipInHand = null;
         }
     }

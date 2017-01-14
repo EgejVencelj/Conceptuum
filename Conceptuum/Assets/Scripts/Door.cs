@@ -18,8 +18,10 @@ public class Door : BoolOutputElement {
 
 		if(outputBool is bool && (bool)outputBool) {
 			anim.SetTrigger("Open");
-		}else {
+			GetComponent<BoxCollider>().enabled = false;
+		} else {
 			anim.ResetTrigger("Open");
+			GetComponent<BoxCollider>().enabled = true;
 		}
 	}
 

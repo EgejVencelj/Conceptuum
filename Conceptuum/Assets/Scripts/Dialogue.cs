@@ -9,16 +9,13 @@ public class Dialogue : MonoBehaviour {
 	public CanvasGroup holder;
 	public RectTransform optionsHolder;
 	public RectTransform optionPrefab;
+	public Robot robot;
 
 	public List<DialogueEntry> textQueue = new List<DialogueEntry>();
 
 	bool busy = false;
 
-	void Start() {
-		textQueue.Add(new DialogueEntry("Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello! Hello!", new List<string>() { "Hello to you too!", "..."}));
-		textQueue.Add(new DialogueEntry("My name is fkin Roboticus!", new List<string>() { "..." }));
-		textQueue.Add(new DialogueEntry("I\ncan\nalso\nspeak\nin\nlines", new List<string>() { "Well that's pretty damn amazing!", "...", "OK, lets check if this works" }));
-	}
+
 
 	void Update() {
 		if(textQueue.Count > 0 && !busy) {
@@ -49,10 +46,11 @@ public class Dialogue : MonoBehaviour {
 			robotDialogue.text += letter;
 			yield return new WaitForSeconds(0.01f);
 		}
-
+		
 
 		int n = dialogue.responses.Count;
 		for(int i = 0; i < n; i++) {
+			yield return new WaitForSeconds(0.5f);
 			string str = dialogue.responses[i];
 			RectTransform response = Instantiate(optionPrefab, optionsHolder);
 			response.transform.SetSiblingIndex(optionsHolder.childCount-1);
@@ -63,15 +61,19 @@ public class Dialogue : MonoBehaviour {
 		
 		while(true) {
 			if(n >= 1 && Input.GetKeyDown(KeyCode.Alpha1)) {
+				robot.Respond(1);
 				break;
 			}
 			if(n >= 2 && Input.GetKeyDown(KeyCode.Alpha2)) {
+				robot.Respond(2);
 				break;
 			}
 			if(n >= 3 && Input.GetKeyDown(KeyCode.Alpha3)) {
+				robot.Respond(3);
 				break;
 			}
 			if(n >= 4 && Input.GetKeyDown(KeyCode.Alpha4)) {
+				robot.Respond(4);
 				break;
 			}
 			yield return null;

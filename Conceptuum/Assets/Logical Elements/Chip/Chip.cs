@@ -145,7 +145,7 @@ public class Chip : BoolOutputElement {
 			
 		}
 		if(attachedSocket != null) {
-			attachedSocket.GetComponent<BoolOutputElement>().outputBool = false;
+			attachedSocket.GetComponent<BoolOutputElement>().outputBool = null;
 			attachedSocket.attachedChip = null;
 			attachedSocket = null;
 		}

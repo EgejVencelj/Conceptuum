@@ -8,16 +8,13 @@ public class Robot : MonoBehaviour {
 	public float duration = 2;
 	float t = 0;
 
-	public Transform player;
 
-	// Use this for initialization
 	void Start () {
-		startPos = transform.position;
+		startPos = transform.localPosition;
 	}
 	
-	// Update is called once per frame
 	void Update () {
-		t = (t + Time.deltaTime) % duration;
-		transform.position = startPos + new Vector3(0, Curve.Evaluate(t / duration), 0);
+		t = (t + Time.deltaTime) % duration;        
+		transform.localPosition = startPos + new Vector3(0, Curve.Evaluate(t / duration)*6, 0);
 	}
 }

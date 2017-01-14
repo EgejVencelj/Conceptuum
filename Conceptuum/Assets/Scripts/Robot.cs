@@ -91,6 +91,52 @@ public class Robot : MonoBehaviour {
 				dialogueState = 6;
 				break;
 			}
+			case 6: {
+				t = new DialogueEntry("STOP! Don't touch anything! A wire in my room turned green, come and see!",
+					new List<string>() {
+												"..."});
+				dialogue.textQueue.Add(t);
+				dialogueState = 0;
+				break;
+			}
+			case 7: {
+				t = new DialogueEntry("Okay, the same thing happened. I think you are done there! If we... you just open this last door, we should be free!",
+					new List<string>() {
+												"..."});
+				dialogue.textQueue.Add(t);
+				dialogueState = 0;
+				break;
+			}
+			case 8: {
+				switch(replyID) {
+					case 0: {
+						t = new DialogueEntry("It looks like the door is jammed. Oh well, you tried.",
+								new List<string>() {
+												"...",
+												"But what now?"});
+						dialogue.textQueue.Add(t);
+						break;
+					}
+					case 2: {
+						t = new DialogueEntry("I will run out of power and you will run out of food. Even I know that.",
+								new List<string>() {
+												"..."});
+						dialogue.textQueue.Add(t);
+						break;
+					}
+					case 1: {
+						t = new DialogueEntry("This is where your story ends.",
+								new List<string>() {
+												"..."});
+						dialogue.textQueue.Add(t);
+						dialogueState = 0;
+						break;
+					}
+				}
+
+				
+				break;
+			}
 		
 		}
 

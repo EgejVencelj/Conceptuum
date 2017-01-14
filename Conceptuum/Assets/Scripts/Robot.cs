@@ -21,7 +21,7 @@ public class Robot : MonoBehaviour {
 	
 	void Update () {
 		t = (t + Time.deltaTime) % duration;        
-		transform.localPosition = startPos + new Vector3(0, Curve.Evaluate(t / duration)*6, 0);
+		transform.localPosition = startPos + new Vector3(0, Curve.Evaluate(t / duration)*3, 0);
 	}
 
 	public void Respond(int replyID) {
@@ -29,7 +29,7 @@ public class Robot : MonoBehaviour {
 		DialogueEntry t = null;
 		switch(dialogueState) {
 			case 1: {
-				t = new DialogueEntry("Greetings, subject. I am Gamma, your cellmate.",
+				t = new DialogueEntry("Greetings, human. I am Gamma, your cellmate.",
 					new List<string>() {
 						"Hello. I don't remember my name.",
 						"..." });
@@ -40,7 +40,7 @@ public class Robot : MonoBehaviour {
 			case 2: {
 				switch(replyID) {
 					case 2: {
-						t = new DialogueEntry("Some would consider such response as rude. No matter, we have more important matters to attend to.",
+						t = new DialogueEntry("Some would consider such responses as rude. No matter, we have more important matters to attend to.",
 							new List<string>() {
 										"...",
 										"I am sorry." });
@@ -48,7 +48,7 @@ public class Robot : MonoBehaviour {
 						goto case 1;
 					}
 					case 1: {
-						t = new DialogueEntry("We are trapped in this facility and I am not equiped to solve this alone. While would pass the Turing test, I am not equipped with hands... If we are to escape, it is on you.",
+						t = new DialogueEntry("We are trapped in this facility and I am not equiped to solve this alone. While I can pass the Turing test, I am not equipped with hands... If we are to escape, it is on you.",
 							new List<string>() {
 								"OK, got it.",
 								"Where do I start?" });
